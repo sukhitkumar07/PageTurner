@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 const Navbar = () => {
   return (
     <div className="flex justify-between px-2 py-1 bg-yellow-400">
-      <div className="font-bold">
-        <img src="#" alt="" />
-        Logo
+      <div className="font-bold text-center">
+        <AutoStoriesIcon /> PageTurner
       </div>
       <div>
         <Link to={"/userHome"} className="mx-2 font-bold hover:text-white">
