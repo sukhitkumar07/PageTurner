@@ -1,13 +1,28 @@
+import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const UserReg = () => {
   let navi = useNavigate();
+  let [name, setname] = useState("");
+  let [phone, setphone] = useState("");
+  let [email, setemail] = useState("");
+  let [password, setpass] = useState("");
+  let userdata = { name, phone, email, password };
   let check = (e) => {
     e.preventDefault();
     let ip = document.getElementsByTagName("input");
     if (ip[3].value == ip[4].value) {
       ip[4].style.outlineWidth = "0px";
-      navi("/Signup");
+      axios
+        .post("http://localhost:8080/users", userdata)
+        .then((res) => {
+          navi("/Signup");
+        })
+        .catch((err) => {
+          {
+          }
+        });
     } else {
       ip[4].style.outlineWidth = "1px";
       ip[4].style.outlineColor = `red`;
@@ -26,6 +41,10 @@ const UserReg = () => {
             placeholder="Enter Name"
             className=" px-1 py-0.5 rounded-md my-1 w-full md:w-52 outline-none focus:outline-1 focus:outline-blue-950 placeholder:text-blue-950"
             required
+            value={name}
+            onChange={(e) => {
+              setname(e.target.value);
+            }}
           />{" "}
           <br />
           <input
@@ -35,6 +54,10 @@ const UserReg = () => {
             placeholder="Enter Phone"
             className="px-1 py-0.5 rounded-md my-1 w-full md:w-52 outline-none focus:outline-1 focus:outline-blue-950 placeholder:text-blue-950"
             required
+            value={phone}
+            onChange={(e) => {
+              setphone(e.target.value);
+            }}
           />{" "}
           <br />
           <input
@@ -42,6 +65,10 @@ const UserReg = () => {
             placeholder="Enter Email id"
             className="px-1 py-0.5 rounded-md my-1 w-full md:w-52 outline-none focus:outline-1 focus:outline-blue-950 placeholder:text-blue-950"
             required
+            value={email}
+            onChange={(e) => {
+              setemail(e.target.value);
+            }}
           />{" "}
           <br />
           <input
@@ -49,6 +76,10 @@ const UserReg = () => {
             placeholder="Enter pasword"
             className="px-1 py-0.5 rounded-md my-1 w-full md:w-52 outline-none focus:outline-1 focus:outline-blue-950 placeholder:text-blue-950"
             required
+            value={password}
+            onChange={(e) => {
+              setpass(e.target.value);
+            }}
           />{" "}
           <br />
           <input

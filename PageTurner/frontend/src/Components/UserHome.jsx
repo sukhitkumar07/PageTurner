@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Books from "./Books";
 import About from "./About";
 import Catagory from "./Catagory";
+import UserEdit from "./UserEdit";
 
 const UserHome = () => {
   return (
@@ -12,6 +13,7 @@ const UserHome = () => {
         <Route path="/books" element={<Books />} />
         <Route path="/catagory" element={<Catagory />} />
         <Route path="/about" element={<About />} />
+        <Route path="/editAccount/:id" element={<UserEdit />} />
       </Routes>
     </div>
   );

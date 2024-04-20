@@ -5,6 +5,7 @@ import org.jsp.pageturner.model.User;
 import org.jsp.pageturner.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping
+	@CrossOrigin
 	public ResponseEntity<ResponseStructure<User>> saveUser(@RequestBody User user) {
 		return userService.saveUser(user);
 	}

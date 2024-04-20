@@ -5,6 +5,7 @@ import org.jsp.pageturner.model.Admin;
 import org.jsp.pageturner.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,9 @@ public class AdminController {
 	private AdminService adminService;
 
 	@PostMapping
+	@CrossOrigin
 	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(@RequestBody Admin admin) {
 		return adminService.saveAdmin(admin);
 	}
 }
+	

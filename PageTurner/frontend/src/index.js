@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./input.css";
 import App from "./App";
 
