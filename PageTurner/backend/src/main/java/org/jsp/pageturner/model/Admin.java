@@ -1,11 +1,15 @@
 package org.jsp.pageturner.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
+
 @Data
 @Entity
 public class Admin {
@@ -22,4 +26,6 @@ public class Admin {
 	private String password;
 	private String status;
 	private String token;
+	@OneToMany(mappedBy = "admin")
+	private List<Book> books;
 }
