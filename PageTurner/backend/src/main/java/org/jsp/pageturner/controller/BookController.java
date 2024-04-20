@@ -1,25 +1,30 @@
 package org.jsp.pageturner.controller;
 
 import org.jsp.pageturner.dto.ResponseStructure;
-import org.jsp.pageturner.model.User;
-import org.jsp.pageturner.service.UserService;
+import org.jsp.pageturner.model.Book;
+import org.jsp.pageturner.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/books")
 @CrossOrigin
-public class UserController {
+public class BookController {
 	@Autowired
-	private UserService userService;
+	private BookService bookService;
 
-	@PostMapping
-	public ResponseEntity<ResponseStructure<User>> saveUser(@RequestBody User user) {
-		return userService.saveUser(user);
+	@PostMapping("/{admin_id}")
+	public ResponseEntity<ResponseStructure<Book>> saveBook(@RequestBody Book book, @PathVariable int admin_id) {
+		return bookService.saveBook(book,admin_id);
 	}
+	
+	
 }
+
+

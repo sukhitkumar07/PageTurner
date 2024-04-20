@@ -1,7 +1,10 @@
 package org.jsp.pageturner.service;
 
+import java.util.Optional;
+
 import org.jsp.pageturner.dao.AdminDao;
 import org.jsp.pageturner.dto.ResponseStructure;
+import org.jsp.pageturner.exception.AdminNotFoundException;
 import org.jsp.pageturner.model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,4 +23,18 @@ public class AdminService {
 		structure.setStatusCode(HttpStatus.CREATED.value());
 		return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.ACCEPTED);
 	}
+
+	public ResponseEntity<ResponseStructure<Admin>> findByEmailAndPassword(String email, String password) {
+		ResponseStructure<Admin> structure = new ResponseStructure<>();
+		Optional<Admin> recAdmin = adminDao.findByEmailAndPassword(email, password);
+		if (recAdmin.isPresent()) {
+			structure.setMessage("Admin Saved Successfully");
+			structure.setBody(recAdmin.get());
+			structure.setStatusCode(HttpStatus.OK.value());
+			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.OK);
+		} else
+			throw new AdminNotFoundException("Invalid Credentials");
+
+	}
+
 }
