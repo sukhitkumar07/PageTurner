@@ -1,5 +1,7 @@
 package org.jsp.pageturner.dao;
 
+import java.util.Optional;
+
 import org.jsp.pageturner.model.User;
 import org.jsp.pageturner.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,5 +14,9 @@ public class UserDao {
 
 	public User saveUser(User user) {
 		return userRepository.save(user);
+	}
+	
+	public Optional<User> findByEmailAndPassword(String email,String password) {
+		return userRepository.findByEmailAndPassword(email, password);
 	}
 }

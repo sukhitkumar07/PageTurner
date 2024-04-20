@@ -1,5 +1,6 @@
 package org.jsp.pageturner.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.jsp.pageturner.dao.AdminDao;
@@ -34,5 +35,14 @@ public class BookService {
 			throw new BookNotFoundException("Invalid Admin Id");
 		}
 
+	}
+	
+	
+	public List<Book> findAll(){
+		return bookDao.findAll();
+	}
+	
+	public List<Book> findByAdminId(int admin_id){
+		return bookDao.findByAdminId(admin_id);
 	}
 }

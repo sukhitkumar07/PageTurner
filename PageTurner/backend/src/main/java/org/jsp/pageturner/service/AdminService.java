@@ -28,7 +28,7 @@ public class AdminService {
 		ResponseStructure<Admin> structure = new ResponseStructure<>();
 		Optional<Admin> recAdmin = adminDao.findByEmailAndPassword(email, password);
 		if (recAdmin.isPresent()) {
-			structure.setMessage("Admin Saved Successfully");
+			structure.setMessage("Admin Found ");
 			structure.setBody(recAdmin.get());
 			structure.setStatusCode(HttpStatus.OK.value());
 			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.OK);
