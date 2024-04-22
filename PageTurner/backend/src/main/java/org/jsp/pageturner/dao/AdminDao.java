@@ -23,4 +23,8 @@ public class AdminDao {
 	public Optional<Admin> findByEmailAndPassword(String email,String password) {
 		return adminRepository.findByEmailAndPassword(email, password);
 	}
+
+	public Optional<Admin> findByToken(String token) {
+		return adminRepository.findByToken(token);
+	}
 }
