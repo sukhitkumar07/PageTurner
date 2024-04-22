@@ -1,7 +1,9 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const Books = () => {
   return (
     <div>
-      <h1>Books page</h1>
+      <h1>Books</h1>
     </div>
   );
 };

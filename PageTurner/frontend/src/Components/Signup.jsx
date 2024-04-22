@@ -1,89 +1,55 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Signup = () => {
   let forgotNav = useNavigate();
   let admNav = useNavigate();
   let usrNav = useNavigate();
-  let [admins, setadmins] = useState([]);
   let [aemail, setaemail] = useState("");
   let [apass, setapass] = useState("");
-  let [users, setusers] = useState([]);
   let [uemail, setuemail] = useState("");
   let [upass, setupass] = useState("");
+  let ip = document.getElementsByTagName("input");
   let forgot = () => {
     forgotNav("/resetPassword");
   };
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/admin")
-      .then((res) => {
-        setadmins(res.data.body);
-      })
-      .catch((err) => {
-        {
-          <div
-            className="modal show"
-            style={{ display: "block", position: "initial" }}
-          >
-            <Modal.Dialog>
-              <Modal.Header closeButton>
-                <Modal.Title>Modal title</Modal.Title>
-              </Modal.Header>
-
-              <Modal.Body>
-                <p>Modal body text goes here.</p>
-              </Modal.Body>
-
-              <Modal.Footer>
-                <Button variant="secondary">Close</Button>
-                <Button variant="primary">Save changes</Button>
-              </Modal.Footer>
-            </Modal.Dialog>
-          </div>;
-        }
-      });
-  }, []);
   let admin = (e) => {
     e.preventDefault();
-    {
-      admins.map((x) => {
-        if (x.email === aemail && x.password === apass) {
-          admNav(`/adminHome/${x.id}`);
-        } else {
-          let ip = document.getElementsByTagName("input");
-          ip[0].style.outlineWidth = "1px";
-          ip[1].style.outlineColor = `red`;
-        }
-      });
-    }
-  };
-  useEffect(() => {
     axios
-      .get("http://localhost:8080/users")
+      .post(
+        `http://localhost:8080/admin/verify-by-email?email=${aemail}&password=${apass}`
+      )
       .then((res) => {
-        setusers(res.data.body);
+        localStorage.setItem("Admin", JSON.stringify(res.data.body));
+        alert("Login successfully");
+        toast.success("Login Successfully...!!!");
+        admNav(`/adminHome`);
       })
-      .catch(() => {
-        console.log("not found");
+      .catch((err) => {
+        ip[0].style.outlineWidth = "1px";
+        ip[1].style.outlineColor = `red`;
       });
-  }, []);
+  };
+
   let user = (e) => {
     e.preventDefault();
-    {
-      users.map((x) => {
-        if (x.email === uemail && x.password === upass) {
-          admNav(`/userHome/${x.id}`);
-        } else {
-          let ip = document.getElementsByTagName("input");
-          ip[2].style.outlineWidth = "1px";
-          ip[3].style.outlineColor = `red`;
-        }
+    axios
+      .post(
+        `http://localhost:8080/users/verify-by-email?email=${uemail}&password=${upass}`
+      )
+      .then((res) => {
+        localStorage.setItem("User", JSON.stringify(res.data.body));
+        alert("Login successfully");
+        usrNav(`/userHome`);
+      })
+      .catch(() => {
+        ip[2].style.outlineWidth = "1px";
+        ip[3].style.outlineColor = `red`;
       });
-    }
   };
+
   return (
     <div className="flex flex-col md:flex-row justify-evenly py-8 md:py-52 ">
       <div className="mb-8 md:mb-0 md:w-1/2 items-center border-2 border-yellow-400 rounded-md px-4 py-4 text-center ">
@@ -130,6 +96,7 @@ const Signup = () => {
             Create Admin?
           </Link>
         </form>
+        <ToastContainer />
       </div>
       <div className="md:w-1/2 items-center border-2 border-yellow-400 rounded-md px-4 py-4 text-center ">
         <h1 className="font-bold font-serif">User Login</h1>
@@ -176,8 +143,6 @@ const Signup = () => {
           </Link>
         </form>
       </div>
-      <Link to={"/adminHome"}>Admin</Link>
-      <Link to={"/userHome"}>User</Link>
     </div>
   );
 };

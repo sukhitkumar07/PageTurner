@@ -4,16 +4,11 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 const AdminNavBar = () => {
-  let aid = useParams();
-  let [name, setname] = useState("Raja Kumar");
-  // useEffect(() => {
-  //   axios.get(`http://localhost:8080/admin/${aid.id}`).then((res) => {
-  //     setname(res.data.body.name);
-  //   });
-  // }, []);
+  let data = JSON.parse(localStorage.getItem("Admin"));
+  console.log(data);
 
   return (
-    <div className="flex justify-around items-center px-2 py-1 bg-yellow-400">
+    <div className="flex justify-between items-center px-2 py-1 bg-yellow-400">
       <div className="font-bold text-center">
         <Link to={"/adminHome"}>
           <AutoStoriesIcon /> PageTurner
@@ -21,7 +16,7 @@ const AdminNavBar = () => {
       </div>
       <div>
         <Link
-          className="mx-6 font-serif font-bold hover:text-amber-100"
+          className=" font-serif font-bold hover:text-amber-100"
           to={"/adminHome/addBook"}
         >
           Add Book
@@ -33,7 +28,7 @@ const AdminNavBar = () => {
           View Books
         </Link>
         <Link
-          className="mx-6 font-serif font-bold hover:text-amber-100"
+          className="font-serif font-bold hover:text-amber-100"
           to={"/adminHome/registeredUsers"}
         >
           View Users
@@ -42,12 +37,14 @@ const AdminNavBar = () => {
       </div>
       <div className="flex items-center font-bold">
         <h1>Welcome</h1>
-        <Dropdown data-bs-theme="dark">
+        <Dropdown>
           <Dropdown.Toggle variant="" id="dropdown-basic">
-            {name}
+            {data.name}
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Link to={`/adminHome/editAccount/${aid.id}`}>Edit account</Link>
+            <Link className="w-fit" to={`/adminHome/editAccount/`}>
+              Edit account
+            </Link>
           </Dropdown.Menu>
         </Dropdown>
         <Link
