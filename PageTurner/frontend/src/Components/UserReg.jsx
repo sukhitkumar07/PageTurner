@@ -19,10 +19,7 @@ const UserReg = () => {
         .then((res) => {
           navi("/Signup");
         })
-        .catch((err) => {
-          {
-          }
-        });
+        .catch((err) => {});
     } else {
       ip[4].style.outlineWidth = "1px";
       ip[4].style.outlineColor = `red`;

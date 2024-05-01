@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
 const AdminReg = () => {
   let navi = useNavigate();
   let [name, setname] = useState("");
   let [phone, setphone] = useState("");
   let [email, setemail] = useState("");
   let [password, setpass] = useState("");
+
   let admindata = { name, phone, email, password };
   let check = (e) => {
     e.preventDefault();
@@ -18,36 +19,18 @@ const AdminReg = () => {
       axios
         .post("http://localhost:8080/admin", admindata)
         .then((res) => {
+          toast.success("Registered Successfully...!!!");
           navi("/Signup");
         })
         .catch((err) => {
-          {
-            <div
-              className="modal show"
-              style={{ display: "block", position: "initial" }}
-            >
-              <Modal.Dialog>
-                <Modal.Header closeButton>
-                  <Modal.Title>Modal title</Modal.Title>
-                </Modal.Header>
-
-                <Modal.Body>
-                  <p>Modal body text goes here.</p>
-                </Modal.Body>
-
-                <Modal.Footer>
-                  <Button variant="secondary">Close</Button>
-                  <Button variant="primary">Save changes</Button>
-                </Modal.Footer>
-              </Modal.Dialog>
-            </div>;
-          }
+          toast.error("Something went wrong...!!!");
         });
     } else {
       ip[4].style.outlineWidth = "1px";
       ip[4].style.outlineColor = `red`;
     }
   };
+
   return (
     <div className=" flex justify-center my-8 md:my-40">
       <div className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 items-center border-2 border-yellow-400 rounded-md px-4 py-4 text-center ">
@@ -115,6 +98,7 @@ const AdminReg = () => {
           <br />
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };
