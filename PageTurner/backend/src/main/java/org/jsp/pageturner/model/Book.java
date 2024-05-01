@@ -24,7 +24,7 @@ public class Book {
 	@Column(nullable = false)
 	private String category;
 	@Column(nullable = false)
-	private String descricption;
+	private String description;
 	@Column(nullable = false)
 	private double price;
 	@Column(nullable = false, unique = true)
