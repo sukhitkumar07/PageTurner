@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Landing from "./Components/Landing";
-import Error from "./Components/Error";
-import Signup from "./Components/Signup";
-import AdminReg from "./Components/AdminReg";
-import UserReg from "./Components/UserReg";
-import Forgot from "./Components/Forgot";
-import AdminHome from "./Components/AdminHome";
-import UserHome from "./Components/UserHome";
-import About from "./Components/About";
+import Landing from "./Component/Landing";
+import Error from "./Component/Error";
+import Signup from "./Component/Signup";
+import AdminReg from "./Component/AdminReg";
+import UserReg from "./Component/UserReg";
+import Forgot from "./Component/Forgot";
+import AdminHome from "./Component/AdminHome";
+import UserHome from "./Component/UserHome";
+import About from "./Component/About";
 function App() {
   return (
     <div>
