@@ -49,7 +49,7 @@ public class BookController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<ResponseStructure<Book>> updateBook(Book book) {
+	public ResponseEntity<ResponseStructure<Book>> updateBook(@RequestBody Book book) {
 		return bookService.updateBook(book);
 	}
 }
