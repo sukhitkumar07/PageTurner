@@ -36,13 +36,45 @@ public class BookService {
 		}
 
 	}
-	
-	
-	public List<Book> findAll(){
+
+	public List<Book> findAll() {
 		return bookDao.findAll();
 	}
-	
-	public List<Book> findByAdminId(int admin_id){
+
+	public List<Book> findByAdminId(int admin_id) {
 		return bookDao.findByAdminId(admin_id);
+	}
+
+	public ResponseEntity<ResponseStructure<Book>> updateBook(Book book) {
+		ResponseStructure<Book> structure = new ResponseStructure<>();
+		Optional<Book> recBook = bookDao.findById(book.getId());
+		if (recBook.isPresent()) {
+			structure.setMessage("Book Updated");
+			structure.setBody(recBook.get());
+			structure.setStatusCode(HttpStatus.ACCEPTED.value());
+			return new ResponseEntity<ResponseStructure<Book>>(structure, HttpStatus.ACCEPTED);
+		}
+		throw new BookNotFoundException("Id is invalid");
+	}
+	
+	public List<Book> findByCategory(String category){
+		List<Book> books=bookDao.findByCategory(category);
+		if(!books.isEmpty()) {
+			return books;
+		}
+		throw new BookNotFoundException("Invalid Category");
+		
+	}
+	
+	public ResponseEntity<ResponseStructure<Book>> findByName(String name) {
+		Optional<Book> recBook= bookDao.findByName(name);
+		ResponseStructure<Book> structure=new ResponseStructure<>();
+		if(recBook.isPresent()) {
+			structure.setMessage("Book Found");
+			structure.setBody(recBook.get());
+			structure.setStatusCode(HttpStatus.ACCEPTED.value());
+			return new  ResponseEntity<ResponseStructure<Book>>(structure, HttpStatus.ACCEPTED);
+		}
+		throw new BookNotFoundException("Invalid Book Name");
 	}
 }
