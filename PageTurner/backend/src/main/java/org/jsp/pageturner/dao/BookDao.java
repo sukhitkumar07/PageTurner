@@ -38,7 +38,15 @@ public class BookDao {
 		return bookRepository.findByCategory(category);
 	}
 
-	
+	public boolean deleteByid(int id) {
+		Optional<Book> recProduct=bookRepository.findById(id);
+		if(recProduct.isPresent()) {
+			bookRepository.deleteById(id);
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
 	
 	

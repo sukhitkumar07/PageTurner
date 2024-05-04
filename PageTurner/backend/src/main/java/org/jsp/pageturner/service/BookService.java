@@ -78,4 +78,27 @@ public class BookService {
 		}
 		throw new BookNotFoundException("Invalid Book Name");
 	}
+	
+	public ResponseEntity<ResponseStructure<Book>> findById(int id) {
+		Optional<Book> recBook=bookDao.findById(id);
+		ResponseStructure<Book> structure = new ResponseStructure<>();
+		if(recBook.isPresent()) {
+			structure.setMessage("Book found");
+			structure.setBody(recBook.get());
+			structure.setStatusCode(HttpStatus.OK.value());
+			return new ResponseEntity<ResponseStructure<Book>>(structure,HttpStatus.OK);
+		}
+		throw new BookNotFoundException("Invalid Book Id");
+	}
+	
+	public ResponseEntity<ResponseStructure<String>> deleteById(int id) {
+		ResponseStructure<String> structure = new ResponseStructure<>();
+		if(bookDao.deleteByid(id)) {
+			structure.setMessage("Book found");
+			structure.setBody("Book Deleted");
+			structure.setStatusCode(HttpStatus.OK.value());
+			return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.OK);
+		}
+		throw new BookNotFoundException("Invalid Book Id");
+	}
 }
