@@ -2,6 +2,7 @@ package org.jsp.pageturner.dao;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.jsp.pageturner.model.Book;
 import org.jsp.pageturner.repository.BookRepository;
@@ -24,4 +25,32 @@ public class BookDao {
 	public List<Book> findByAdminId(int admin_id){
 		return bookRepository.findByAdminId(admin_id);
 	}
+	
+	public Optional<Book> findById(int id) {
+		return bookRepository.findById(id);
+	}
+	
+	public Optional<Book> findByName(String name) {
+		return bookRepository.findByName(name);
+	}
+	
+	public List<Book> findByCategory(String category){
+		return bookRepository.findByCategory(category);
+	}
+
+	public boolean deleteByid(int id) {
+		Optional<Book> recProduct=bookRepository.findById(id);
+		if(recProduct.isPresent()) {
+			bookRepository.deleteById(id);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	
+	
+	
+	
+	
 }
