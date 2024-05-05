@@ -10,7 +10,7 @@ import UserHome from "./Component/UserHome";
 import About from "./Component/About";
 function App() {
   return (
-    <div>
+    <div className="bg-gray-50">
       {/* gold->-yellow-400,pink->-pink-500,darkblue->-blue-950,purple->bg-purple-900,cream->text-amber-100 */}
 
       <BrowserRouter>

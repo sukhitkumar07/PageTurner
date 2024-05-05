@@ -8,7 +8,7 @@ import EditBook from "./Editbook";
 
 const AdminHome = () => {
   return (
-    <div>
+    <div className="bg-gray-50">
       <AdminNavBar />
       <Routes>
         <Route path="/addBook" element={<AdminAddBook />} />

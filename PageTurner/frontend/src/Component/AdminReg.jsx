@@ -3,13 +3,20 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
+import MyAlert from "./Alert";
 const AdminReg = () => {
   let navi = useNavigate();
   let [name, setname] = useState("");
   let [phone, setphone] = useState("");
   let [email, setemail] = useState("");
   let [password, setpass] = useState("");
-
+  let [alertd, setAlert] = useState(null);
+  let showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+  };
   let admindata = { name, phone, email, password };
   let check = (e) => {
     e.preventDefault();
@@ -19,13 +26,13 @@ const AdminReg = () => {
       axios
         .post("http://localhost:8080/admin", admindata)
         .then((res) => {
-          toast.success("Registered Successfully...!!!");
           navi("/Signup");
         })
         .catch((err) => {
-          toast.error("Something went wrong...!!!");
+          showAlert("Something went wrong...!!!", "warning");
         });
     } else {
+      showAlert("Something went wrong...!!!", "warning");
       ip[4].style.outlineWidth = "1px";
       ip[4].style.outlineColor = `red`;
     }
@@ -33,6 +40,10 @@ const AdminReg = () => {
 
   return (
     <div className=" flex justify-center my-8 md:my-40">
+      <div className="fixed top-0 w-full ">
+        {" "}
+        <MyAlert alert={alertd} />
+      </div>
       <div className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 items-center border-2 border-yellow-400 rounded-md px-4 py-4 text-center ">
         <h1 className="font-bold font-serif text-blue-950">
           Admin Registration Page

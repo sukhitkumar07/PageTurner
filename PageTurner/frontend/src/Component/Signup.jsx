@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MyAlert from "./Alert";
 const Signup = () => {
   let forgotNav = useNavigate();
   let admNav = useNavigate();
@@ -12,8 +13,15 @@ const Signup = () => {
   let [uemail, setuemail] = useState("");
   let [upass, setupass] = useState("");
   let ip = document.getElementsByTagName("input");
+  let [alertd, setAlert] = useState(null);
   let forgot = () => {
     forgotNav("/resetPassword");
+  };
+  let showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
   };
   let admin = (e) => {
     e.preventDefault();
@@ -23,11 +31,12 @@ const Signup = () => {
       )
       .then((res) => {
         localStorage.setItem("Admin", JSON.stringify(res.data.body));
-        alert("Login successfully");
-        toast.success("Login Successfully...!!!");
+        showAlert("Login in successfully", "success");
+        setTimeout(5000);
         admNav(`/adminHome`);
       })
       .catch((err) => {
+        showAlert("invalid credentials", "danger");
         ip[0].style.outlineWidth = "1px";
         ip[1].style.outlineColor = `red`;
       });
@@ -41,10 +50,13 @@ const Signup = () => {
       )
       .then((res) => {
         localStorage.setItem("User", JSON.stringify(res.data.body));
-        alert("Login successfully");
-        usrNav(`/userHome`);
+        showAlert("Login in successfully", "success");
+        setTimeout(() => {
+          usrNav(`/userHome`);
+        }, 3000);
       })
       .catch(() => {
+        showAlert("invalid credentials", "danger");
         ip[2].style.outlineWidth = "1px";
         ip[3].style.outlineColor = `red`;
       });
@@ -52,6 +64,10 @@ const Signup = () => {
 
   return (
     <div className="flex flex-col md:flex-row justify-evenly py-8 md:py-52 ">
+      <div className="fixed top-0 w-full ">
+        {" "}
+        <MyAlert alert={alertd} />
+      </div>
       <div className="mb-8 md:mb-0 md:w-1/2 items-center border-2 border-yellow-400 rounded-md px-4 py-4 text-center ">
         <h1 className="font-bold font-serif">Admin Login</h1>
         <form onSubmit={admin}>

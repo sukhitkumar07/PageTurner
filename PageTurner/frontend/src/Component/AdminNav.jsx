@@ -8,7 +8,7 @@ const AdminNavBar = () => {
 
   return (
     <div className="flex justify-between items-center px-2 py-1 bg-yellow-400">
-      <div className="font-bold text-center">
+      <div className="hover:font-bold text-center">
         <Link to={"/adminHome"}>
           <AutoStoriesIcon /> PageTurner
         </Link>

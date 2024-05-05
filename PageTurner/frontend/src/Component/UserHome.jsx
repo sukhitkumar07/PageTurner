@@ -8,7 +8,7 @@ import Hero from "./Hero";
 
 const UserHome = () => {
   return (
-    <div>
+    <div className="bg-gray-50">
       <Navbar />
       <Routes>
         <Route path="/" element={<Hero />} />

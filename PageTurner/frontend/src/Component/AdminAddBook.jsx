@@ -6,7 +6,7 @@ const AdminAddBook = () => {
   let [name, setname] = useState("");
   let [author, setauthor] = useState("");
   let [category, setCategory] = useState("");
-  let [descricption, setDescrition] = useState("");
+  let [description, setDescrition] = useState("");
   let [price, setprice] = useState("");
   let [isbn, setISBN] = useState("");
   let [img_url, setimageUrl] = useState("");
@@ -15,7 +15,7 @@ const AdminAddBook = () => {
     name,
     author,
     category,
-    descricption,
+    description,
     price,
     isbn,
     img_url,
@@ -76,7 +76,7 @@ const AdminAddBook = () => {
             placeholder="Enter Description"
             className="px-1 py-0.5 rounded-md my-1 w-full md:w-52 outline-none focus:outline-1 focus:outline-blue-950 placeholder:text-blue-950"
             required
-            value={descricption}
+            value={description}
             onChange={(e) => {
               setDescrition(e.target.value);
             }}

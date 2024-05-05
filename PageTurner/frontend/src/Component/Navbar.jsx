@@ -8,7 +8,7 @@ const Navbar = () => {
   console.log(data.name);
   return (
     <div className="flex justify-between items-center px-2 py-1 bg-yellow-400">
-      <div className="font-bold text-center">
+      <div className="hover:font-bold font-medium hover:text-amber-100 text-center">
         <Link to={"/userHome"}>
           <AutoStoriesIcon /> PageTurner
         </Link>
@@ -16,33 +16,40 @@ const Navbar = () => {
       <div>
         <Link
           to={"/userHome/books"}
-          className=" font-bold hover:text-amber-100"
+          className=" hover:font-bold font-medium hover:text-blue-950"
         >
           Books
         </Link>
         <Link
           to={"/userHome/catagory"}
-          className="mx-4 font-bold hover:text-amber-100"
+          className="mx-4 hover:font-bold font-medium hover:text-blue-950"
         >
           Catagories
         </Link>
-        <Link to={"/userHome/about"} className="font-bold hover:text-amber-100">
+        <Link
+          to={"/userHome/about"}
+          className="hover:font-bold font-medium hover:text-blue-950"
+        >
           About
         </Link>
       </div>
       <div className="flex items-center">
-        <Dropdown className="flex items-center text-black">
+        <Dropdown className="flex items-center font-medium text-black">
           <h1>Welcome</h1>
-          <Dropdown.Toggle variant="" id="dropdown-basic">
+          <Dropdown.Toggle
+            className="font-medium border-none"
+            variant=""
+            id="dropdown-basic"
+          >
             {data.name}
           </Dropdown.Toggle>
-          <Dropdown.Menu>
+          <Dropdown.Menu className="border-none bg-transparent">
             <Link to={`/userHome/editAccount/`}>Edit account</Link>
           </Dropdown.Menu>
         </Dropdown>
         <Link
           to={`/Signup`}
-          className="btn hover:bg-blue-950 hover:text-amber-100"
+          className="btn font-medium hover:bg-blue-950 hover:text-amber-100"
         >
           Sign out
         </Link>
