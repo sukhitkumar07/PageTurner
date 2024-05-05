@@ -59,7 +59,7 @@ const AdminViewBook = () => {
               </td>
               <td className=" w-[600px]">
                 <h1 className="font-bold underline">Description : </h1>
-                <p className="line-clamp-3">{x.descricption}</p>
+                <p className="line-clamp-3">{x.description}</p>
               </td>
               <td className="w-28 ">
                 <button

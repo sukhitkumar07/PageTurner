@@ -13,19 +13,29 @@ const Navbar = () => {
           <AutoStoriesIcon /> PageTurner
         </Link>
       </div>
-      <div>
+      <div className="flex items-center">
         <Link
           to={"/userHome/books"}
           className=" hover:font-bold font-medium hover:text-blue-950"
         >
           Books
         </Link>
-        <Link
-          to={"/userHome/catagory"}
-          className="mx-4 hover:font-bold font-medium hover:text-blue-950"
-        >
-          Catagories
-        </Link>
+        <Dropdown className="mx-4 hover:font-bold font-medium bg-transparent outline-none hover:text-blue-950">
+          <Dropdown.Toggle
+            id="dropdown-basic"
+            className="bg-transparent font-medium border-none text-black"
+          >
+            Search books
+          </Dropdown.Toggle>
+          <Dropdown.Menu className="border-none rounded-t-none bg-yellow-400">
+            <Dropdown.Item>
+              <Link to={"/userHome/FindByName"}>Search by name</Link>
+            </Dropdown.Item>
+            <Dropdown.Item>
+              <Link to={"/userHome/FindByCategory"}>Search by category</Link>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
         <Link
           to={"/userHome/about"}
           className="hover:font-bold font-medium hover:text-blue-950"

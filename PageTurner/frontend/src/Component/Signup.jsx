@@ -32,8 +32,9 @@ const Signup = () => {
       .then((res) => {
         localStorage.setItem("Admin", JSON.stringify(res.data.body));
         showAlert("Login in successfully", "success");
-        setTimeout(5000);
-        admNav(`/adminHome`);
+        setTimeout(() => {
+          admNav(`/adminHome`);
+        }, 2000);
       })
       .catch((err) => {
         showAlert("invalid credentials", "danger");
@@ -53,7 +54,7 @@ const Signup = () => {
         showAlert("Login in successfully", "success");
         setTimeout(() => {
           usrNav(`/userHome`);
-        }, 3000);
+        }, 2000);
       })
       .catch(() => {
         showAlert("invalid credentials", "danger");

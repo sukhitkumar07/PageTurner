@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 const EditBook = () => {
   let data = JSON.parse(localStorage.getItem("Admin"));
+  let [id, setId] = useState();
   let [name, setname] = useState("");
   let [author, setauthor] = useState("");
   let [category, setCategory] = useState("");
@@ -13,6 +14,7 @@ const EditBook = () => {
   let [url, setbookUrl] = useState("");
   let param = useParams();
   let newbookdata = {
+    id,
     name,
     author,
     category,
@@ -22,10 +24,26 @@ const EditBook = () => {
     img_url,
     url,
   };
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/books/find-by-id/${param.id}`)
+      .then((res) => {
+        setId(res.data.body.id);
+        setname(res.data.body.name);
+        setauthor(res.data.body.author);
+        setCategory(res.data.body.category);
+        setDescrition(res.data.body.description);
+        setprice(res.data.body.price);
+        setISBN(res.data.body.isbn);
+        setbookUrl(res.data.body.url);
+        setimageUrl(res.data.body.img_url);
+      })
+      .catch((err) => {});
+  }, []);
   let editData = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:8080/books/${param.id}`, newbookdata)
+      .put(`http://localhost:8080/books`, newbookdata)
       .then((res) => {
         alert(`data updated successfully`);
       })
@@ -39,6 +57,17 @@ const EditBook = () => {
         <h1 className="font-bold font-serif text-blue-950">Add Book</h1>{" "}
         <hr className="bg-blue-950" />
         <form onSubmit={editData}>
+          <input
+            type="text"
+            placeholder="Enter Book Name"
+            className=" px-1 py-0.5 rounded-md my-1 w-full md:w-52 outline-none focus:outline-1 focus:outline-blue-950 placeholder:text-blue-950"
+            required
+            value={id}
+            onChange={(e) => {
+              setId(e.target.value);
+            }}
+          />{" "}
+          <br />
           <input
             type="text"
             placeholder="Enter Book Name"
