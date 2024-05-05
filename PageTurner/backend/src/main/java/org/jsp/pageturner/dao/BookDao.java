@@ -30,7 +30,7 @@ public class BookDao {
 		return bookRepository.findById(id);
 	}
 	
-	public Optional<Book> findByName(String name) {
+	public List<Book> findByName(String name) {
 		return bookRepository.findByName(name);
 	}
 	

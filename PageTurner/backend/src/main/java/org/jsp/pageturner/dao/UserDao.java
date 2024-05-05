@@ -19,4 +19,8 @@ public class UserDao {
 	public Optional<User> findByEmailAndPassword(String email,String password) {
 		return userRepository.findByEmailAndPassword(email, password);
 	}
+
+	public Optional<User> findById(int id) {
+		return userRepository.findById(id);
+	}
 }

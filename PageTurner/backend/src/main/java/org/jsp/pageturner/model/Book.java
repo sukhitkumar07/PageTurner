@@ -1,5 +1,6 @@
 package org.jsp.pageturner.model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -23,7 +24,7 @@ public class Book {
 	private String author;
 	@Column(nullable = false)
 	private String category;
-	@Column(nullable = false)
+	@Column(nullable = false )
 	private String description;
 	@Column(nullable = false)
 	private double price;

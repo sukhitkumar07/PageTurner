@@ -40,7 +40,7 @@ public class BookController {
 	}
 
 	@GetMapping("/find-by-name/{name}")
-	public ResponseEntity<ResponseStructure<Book>> findByName(@PathVariable String name) {
+	public ResponseEntity<ResponseStructure<List<Book>>> findByName(@PathVariable String name) {
 		return bookService.findByName(name);
 	}
 
@@ -62,5 +62,10 @@ public class BookController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ResponseStructure<String>> deleteById(@PathVariable int id) {
 		return bookService.deleteById(id);
+	}
+	
+	@PutMapping("/{user_id}/{book_id}")
+	public ResponseEntity<ResponseStructure<String>> addToFavorite(int user_id,int book_id) {
+		return bookService.addToFavorite(user_id, book_id);
 	}
 }
